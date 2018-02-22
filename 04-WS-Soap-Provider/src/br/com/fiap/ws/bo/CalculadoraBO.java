@@ -15,4 +15,8 @@ public class CalculadoraBO {
 		return resultado;
 	}
 
+	public double raizQuadrada(int x) {
+		return Math.sqrt(x);
+	}
+
 }
