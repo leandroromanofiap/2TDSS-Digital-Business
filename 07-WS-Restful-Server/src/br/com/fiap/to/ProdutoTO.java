@@ -42,6 +42,14 @@ public class ProdutoTO implements Serializable {
 		this.preco = preco;
 		this.disponivel = disponivel;
 	}
+	
+	public ProdutoTO(String nome, String descricao, double preco, boolean disponivel) {
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.disponivel = disponivel;
+	}
 
 	public int getCodigo() {
 		return codigo;
