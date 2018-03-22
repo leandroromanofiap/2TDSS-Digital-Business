@@ -1,6 +1,7 @@
 package br.com.fiap.jpa.dao.impl;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -45,6 +46,11 @@ public class GenericDAOImpl<T,K>
 	@Override
 	public T pesquisar(K codigo) {
 		return em.find(clazz, codigo);
+	}
+	
+	@Override
+	public List<T> listar() {
+		return em.createQuery("from " + clazz.getName(), clazz).getResultList();
 	}
 
 	@Override
