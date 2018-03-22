@@ -11,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -81,15 +82,12 @@ public class SelecaoResource {
 
 	@DELETE
 	@Path("/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response remover(@PathParam(value = "id") int codigo) {
+	public void remover(@PathParam(value = "id") int codigo) {
 		try {
 			selecaoDao.remover(codigo);
 			selecaoDao.commit();
 		} catch (KeyNotFoundException | CommitException e) {
-			return Response.serverError().build();
+			throw new WebApplicationException(e.getMessage());
 		}
-
-		return Response.ok().build();
 	}
 }
