@@ -1,37 +1,28 @@
 package br.com.fiap.ws.view;
 
-import java.util.Arrays;
 import java.util.List;
 
-import javax.ws.rs.core.MediaType;
-
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-
 import br.com.fiap.to.Selecao;
+import br.com.fiap.ws.service.SelecaoService;
 
 public class ListaView {
 
+	static SelecaoService selecaoService = new SelecaoService();
+	
 	public static void main(String[] args) {
-
-		Client client = new Client();
-
-		WebResource resource = client.resource("http://localhost:8080/08-WS-Resful-Server-2/rest/selecao");
-
-		ClientResponse response = resource.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
-
-		if (response.getStatus() == 200) {
-			Selecao[] vetor = response.getEntity(Selecao[].class);
-
-			List<Selecao> lista = Arrays.asList(vetor);
-
-			for (Selecao selecao : lista) {
+		List<Selecao> listaSelecao;
+		try {
+			listaSelecao = selecaoService.listar();
+			
+			for (Selecao selecao : listaSelecao) {
 				System.out.println(selecao.getPais());
 				System.out.println(selecao.getNumeroMundiais());
-				System.out.println("****************************");
+				System.out.println("***************************");
 			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
-
 }
