@@ -17,6 +17,18 @@ public class SelecaoService {
 
 	private static final String URL = "http://localhost:8080/08-WS-Resful-Server-2/rest/selecao";
 
+	public Selecao buscar(int codigo) throws Exception {
+		WebResource resource = client.resource(URL).path(String.valueOf(codigo));
+		
+		ClientResponse response = resource.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+		
+		if (response.getStatus() == 200) {
+			return response.getEntity(Selecao.class);
+		} else {
+			throw new Exception("Não existe.");
+		}
+	}
+	
 	public List<Selecao> listar() throws Exception {
 		WebResource resource = client.resource(URL);
 
@@ -40,4 +52,21 @@ public class SelecaoService {
 		}
 	}
 
+	public void atualizar(Selecao selecao, int codigo) throws Exception {
+		WebResource resource = client.resource(URL).path(String.valueOf(codigo));
+		
+		ClientResponse response = resource.type(MediaType.APPLICATION_JSON).put(ClientResponse.class, selecao);
+		
+		if (response.getStatus() != 200)
+			throw new Exception("Erro ao atualizar.");
+	}
+	
+	public void remover(int codigo) throws Exception {
+		WebResource resource = client.resource(URL).path(String.valueOf(codigo));
+		
+		ClientResponse response = resource.type(MediaType.APPLICATION_JSON).delete(ClientResponse.class);
+		
+		if (response.getStatus() != 204)
+			throw new Exception("Erro ao remover.");
+	}
 }
