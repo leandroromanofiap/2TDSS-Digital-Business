@@ -10,22 +10,19 @@ import br.com.fiap.ws.to.Selecao;
 public class SelecaoBean {
 
 	private Selecao selecao;
+	private SelecaoService service;
 	
 	@PostConstruct
 	private void init() {
 		selecao = new Selecao();
+		service = new SelecaoService();
 	}
 	
 	public void cadastrar() {
-		System.out.println("chamou o cadastro.");
-		
-		SelecaoService service = new SelecaoService();
-		
 		try {
 			service.cadastrar(selecao);
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			System.err.println("Erro ao tentar cadastrar.");
 		}
 	}
 
