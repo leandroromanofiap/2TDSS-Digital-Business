@@ -4,12 +4,19 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
+<h:head>
+	<title>Seleção</title>
+</h:head>
+
 <h:body>
 
-	<h:outputLabel value="Cadastrar Selecao" />
+	<h:outputLabel value="Selecao" />
 	<br />
 
 	<h:form>
+		<h:messages />
+		<h:inputHidden value="#{selecaoBean.selecao.codigo}" />
+
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Nome: " />
 			<h:inputText value="#{selecaoBean.selecao.pais}" />
@@ -27,7 +34,7 @@
 				<f:selectItem itemLabel="5" itemValue="5" />
 			</h:selectOneMenu>
 
-			<h:commandButton action="#{selecaoBean.cadastrar()}" value="Salvar" />
+			<h:commandButton action="#{selecaoBean.salvar()}" value="Salvar" />
 		</h:panelGrid>
 	</h:form>
 
