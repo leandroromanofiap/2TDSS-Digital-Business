@@ -6,39 +6,47 @@
 
 <h:head>
 	<title>Lista de Seleções</title>
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputScript library="js" name="jquery-3.3.1.min.js" />
+	<h:outputScript library="js" name="bootstrap.js" />
 </h:head>
 
 <h:body>
-	<h1>Lista de Seleções</h1>
-	<h:messages />
+	<div class="container">
+		<h1>Lista de Seleções</h1>
+		<h:messages />
 
-	<h:dataTable value="#{selecaoBean.selecoes}" var="s">
-		<h:column>
-			<f:facet name="header">Código</f:facet>
+		<h:dataTable value="#{selecaoBean.selecoes}" var="s"
+			styleClass="table table-striped">
+			<h:column>
+				<f:facet name="header">Código</f:facet>
 			#{s.codigo}
 		</h:column>
-		<h:column>
-			<f:facet name="header">País</f:facet>
+			<h:column>
+				<f:facet name="header">País</f:facet>
 			#{s.pais}
 		</h:column>
-		<h:column>
-			<f:facet name="header">Classificado</f:facet>
+			<h:column>
+				<f:facet name="header">Classificado</f:facet>
 			#{s.classificado?"Sim":"Não"}
 		</h:column>
-		<h:column>
-			<f:facet name="header">Número de Mundiais</f:facet>
+			<h:column>
+				<f:facet name="header">Número de Mundiais</f:facet>
 			#{s.numeroMundiais}
 		</h:column>
-		<h:column>
-			<f:facet name="header">Ações</f:facet>
-			<h:form>
-				<h:commandButton action="cadastrarselecao" value="Alterar">
-					<f:setPropertyActionListener value="#{s}"
-						target="#{selecaoBean.selecao}" />
-				</h:commandButton>
-				<h:commandButton action="#{selecaoBean.deletar(s.codigo)}" value="Remover" />
-			</h:form>
-		</h:column>
-	</h:dataTable>
+			<h:column>
+				<f:facet name="header">Ações</f:facet>
+				<h:form>
+					<h:commandButton action="cadastrarselecao" value="Alterar"
+						styleClass="btn btn-primary">
+						<f:setPropertyActionListener value="#{s}"
+							target="#{selecaoBean.selecao}" />
+					</h:commandButton>
+					<h:commandButton action="#{selecaoBean.deletar(s.codigo)}"
+						value="Remover" styleClass="btn btn-danger" style="margin-left:20px;"/>
+				</h:form>
+			</h:column>
+		</h:dataTable>
+	</div>
 </h:body>
 </html>
