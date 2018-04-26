@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Listagem de Pacientes</title>
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputScript library="js" name="jquery-3.3.1.min.js" />
+	<h:outputScript library="js" name="bootstrap.js" />
+</h:head>
+
+<h:body>
+	<div class="container">
+		<h1>Lista de Pacientes</h1>
+		<h:messages />
+
+		<h:dataTable value="#{pacienteBean.pacientes}" var="paciente"
+			styleClass="table table-striped">
+			<h:column>
+				<f:facet name="header">Código</f:facet>
+				#{paciente.codigo}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				#{paciente.nome}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Doador</f:facet>
+				#{paciente.doador?"Sim":"Não"}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Data de nascimento</f:facet>
+				<h:outputText value="#{paciente.dataNascimento.time}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Ações</f:facet>
+				<h:form>
+					<h:commandButton action="atualizar" value="Alterar"
+						styleClass="btn btn-primary">
+						<f:setPropertyActionListener value="#{paciente}"
+							target="#{pacienteBean.paciente}" />
+					</h:commandButton>
+					<h:commandButton action="#{pacienteBean.deletar(paciente.codigo)}"
+						value="Remover" styleClass="btn btn-danger"
+						style="margin-left:20px;" />
+				</h:form>
+			</h:column>
+		</h:dataTable>
+	</div>
+</h:body>
+
+</html>
