@@ -4,17 +4,10 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head>
-	<title>Atualizar Paciente</title>
-	<h:outputStylesheet library="css" name="bootstrap.css" />
-	<h:outputScript library="js" name="jquery-3.3.1.min.js" />
-	<h:outputScript library="js" name="bootstrap.js" />
-</h:head>
-
-<h:body>
-	<div class="container">
-		<h1>Atualizar Paciente</h1>
-		<br />
+<ui:composition template="/_template.xhtml">
+	<ui:define name="titulo">Atualizar Paciente</ui:define>
+	<ui:define name="corpo">
+		<h3>Atualizar Paciente</h3>
 		<hr />
 
 		<h:form>
@@ -44,6 +37,6 @@
 			</div>
 
 		</h:form>
-	</div>
-</h:body>
+	</ui:define>
+</ui:composition>
 </html>

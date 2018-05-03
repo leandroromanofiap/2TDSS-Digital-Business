@@ -4,17 +4,10 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head>
-	<title>Cadastrar Paciente</title>
-	<h:outputStylesheet library="css" name="bootstrap.css" />
-	<h:outputScript library="js" name="jquery-3.3.1.min.js" />
-	<h:outputScript library="js" name="bootstrap.js" />
-</h:head>
-
-<h:body>
-	<div class="container">
-		<h1>Cadastrar Paciente</h1>
-		<br />
+<ui:composition template="/_template.xhtml">
+	<ui:define name="titulo">Cadastrar Paciente</ui:define>
+	<ui:define name="corpo">
+		<h3>Cadastrar Paciente</h3>
 		<hr />
 
 		<h:form>
@@ -41,8 +34,9 @@
 				<h:commandButton action="#{pacienteBean.salvar()}" value="Salvar"
 					styleClass="btn btn-success" />
 			</div>
-
 		</h:form>
-	</div>
-</h:body>
+
+		<h:link outcome="listar">Listagem de pacientes</h:link>
+	</ui:define>
+</ui:composition>
 </html>

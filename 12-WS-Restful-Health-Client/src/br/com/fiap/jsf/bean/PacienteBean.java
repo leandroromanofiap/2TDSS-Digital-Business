@@ -41,37 +41,47 @@ public class PacienteBean {
 		this.paciente = paciente;
 	}
 
-	public void salvar() {
+	public String salvar() {
 		FacesMessage msg;
 
 		try {
 			service.cadastrar(paciente);
 
 			msg = new FacesMessage("Sucesso!");
+			
+			return "listar?faces-redirect=true";
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			msg = new FacesMessage("Erro ao cadastrar.");
 		}
 
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+		
+		return "paciente";
 	}
 
-	public void atualizar() {
+	public String atualizar() {
 		FacesMessage msg;
 
 		try {
 			service.atualizar(paciente, paciente.getCodigo());
 
 			msg = new FacesMessage("Atualizado com sucesso!");
+			
+			return "listar?faces-redirect=true";
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			msg = new FacesMessage("Erro ao atualizar.");
 		}
-
+		
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+		
+		return "atualizar";
 	}
 
-	public void deletar(int codigo) {
+	public String deletar(int codigo) {
 		FacesMessage msg;
 
 		try {
@@ -83,5 +93,8 @@ public class PacienteBean {
 		}
 
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+		
+		return "listar?faces-redirect=true";
 	}
 }
