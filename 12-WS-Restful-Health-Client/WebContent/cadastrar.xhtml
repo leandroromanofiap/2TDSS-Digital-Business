@@ -15,8 +15,14 @@
 
 			<div class="form-group">
 				<h:outputLabel value="Nome: " />
-				<h:inputText value="#{pacienteBean.paciente.nome}"
-					styleClass="form-control" />
+				<h:inputText required="true"
+					id="nome"
+				 	requiredMessage="O nome é obrigatório."
+					value="#{pacienteBean.paciente.nome}"
+					styleClass="form-control">
+						<f:validateLength maximum="50" minimum="3"/>
+					</h:inputText>
+					<h:message for="nome" styleClass="text-danger"/>
 			</div>
 			<div class="form-group">
 				<h:outputLabel value="Doador: " for="idDoador" />
@@ -25,10 +31,13 @@
 			</div>
 			<div class="form-group">
 				<h:outputLabel value="Data de Nascimento: " />
-				<h:inputText value="#{pacienteBean.paciente.dataNascimento.time}"
+				<h:inputText
+					id="dataNascimento" 
+					value="#{pacienteBean.paciente.dataNascimento.time}"
 					styleClass="form-control">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</h:inputText>
+				<h:message for="dataNascimento" styleClass="text-danger"/>
 			</div>
 			<div class="form-group">
 				<h:commandButton action="#{pacienteBean.salvar()}" value="Salvar"
